@@ -1,0 +1,1 @@
+export const Races = ["Humano", "Togruta", "Wookie", "Twi'lek", "Zabrak", "Rodiano", "Yaddle"] as const
