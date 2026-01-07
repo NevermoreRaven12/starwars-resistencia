@@ -1,15 +1,16 @@
 import { Races } from './races';
 import { Classes } from './classes';
+import { Atributo } from './atributes';
 
-interface Character{
+export interface Character{
     id: number,
     titulo: string,
     nome: string,
     nivel: number,
     portrait: string,
     // criei a lista de raças e classes, não sei se é assim que faz pra dizer que tem q ser algum dos q tão la na array
-    raca: typeof Races,
-    classe: typeof Classes,
+    raca: typeof Races[number],
+    classe: typeof Classes[number],
     // TODO - lembrar do cálculo da experiência com base no valor
     experiencia: {
         atual: number,
@@ -22,11 +23,7 @@ interface Character{
         stamina?: number
     },
     // nao tenho certeza se funciona do jeito q eu gostaria
-    atributos: [{
-        tipo: string,
-        valor: number,
-        bonus: number
-    },],
+    atributos: Atributo[]
     historia: string
 }
 

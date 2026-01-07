@@ -1,4 +1,4 @@
-function calcularXpMax(nivel: number): number {
+export function calcularXpMax(nivel: number): number {
     if (nivel === 1) {
         return 250
     }
@@ -14,7 +14,7 @@ function calcularXpMax(nivel: number): number {
     return xpFinal
 }
 
-function getBonus(atributo: number): number {
+export function getBonus(atributo: number): number {
     let bonus:number = 0
     if (atributo < 10) {
         bonus = bonus - 1
