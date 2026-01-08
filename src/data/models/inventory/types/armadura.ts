@@ -3,7 +3,7 @@ export interface Armadura {
     tipo: string,
     nome: string,
     preco: number,
-    ca: string,
+    ca: number,
     descricao: string,
     efeito?: string
 }

@@ -1,6 +1,6 @@
-import { Character } from "./baseSheet";
-import { getBonus } from "./utils";
-import { calcularXpMax } from "./utils";
+import { Character } from "../models/char/baseSheet";
+import { getBonus } from "../models/char/utils";
+import { calcularXpMax } from "../models/char/utils";
 
 const nivel = 4
 

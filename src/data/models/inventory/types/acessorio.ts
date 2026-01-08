@@ -3,4 +3,5 @@ export interface Acessorio {
     nome: string
     descricao: string
     efeito?: string
+    preco: number
 }
