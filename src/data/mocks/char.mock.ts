@@ -12,7 +12,7 @@ export const CharMock: Character = {
     portrait: 'ronn.png',
 
     raca: "Twi'lek",
-    classe: "Monge",
+    classe: "Cavaleiro Jedi",
 
     experiencia: {
         atual: 0,

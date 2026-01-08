@@ -1,38 +1,56 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as Linking from 'expo-linking'
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen'
-import { Fonts } from './src/theme/Fonts';
+import { NavigationContainer } from '@react-navigation/native';
+import BottomTabs from './src/navigation/BottomTab';
 
-SplashScreen.preventAutoHideAsync();
+
 
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-     StarJedi: require('./assets/fonts/StarJedi.ttf'),
+     StarJedi: require('./assets/fonts/star_jedi/StarJedi.ttf'),
 
     // Open Sans
-    OpenSans_300: require('./assets/fonts/OpenSans/OpenSans-Light.ttf'),
-    OpenSans_300_Italic: require('./assets/fonts/OpenSans/OpenSans-LightItalic.ttf'),
+    OpenSans_300: require('./assets/fonts/Open_Sans/static/OpenSans-Light.ttf'),
+    OpenSans_300_Italic: require('./assets/fonts/Open_Sans/static/OpenSans-LightItalic.ttf'),
 
-    OpenSans_400: require('./assets/fonts/OpenSans/OpenSans-Regular.ttf'),
-    OpenSans_400_Italic: require('./assets/fonts/OpenSans/OpenSans-Italic.ttf'),
+    OpenSans_400: require('./assets/fonts/Open_Sans/static/OpenSans-Regular.ttf'),
+    OpenSans_400_Italic: require('./assets/fonts/Open_Sans/static/OpenSans-Italic.ttf'),
 
-    OpenSans_500: require('./assets/fonts/OpenSans/OpenSans-Medium.ttf'),
-    OpenSans_500_Italic: require('./assets/fonts/OpenSans/OpenSans-MediumItalic.ttf'),
+    OpenSans_500: require('./assets/fonts/Open_Sans/static/OpenSans-Medium.ttf'),
+    OpenSans_500_Italic: require('./assets/fonts/Open_Sans/static/OpenSans-MediumItalic.ttf'),
 
-    OpenSans_600: require('./assets/fonts/OpenSans/OpenSans-SemiBold.ttf'),
-    OpenSans_600_Italic: require('./assets/fonts/OpenSans/OpenSans-SemiBoldItalic.ttf'),
+    OpenSans_600: require('./assets/fonts/Open_Sans/static/OpenSans-SemiBold.ttf'),
+    OpenSans_600_Italic: require('./assets/fonts/Open_Sans/static/OpenSans-SemiBoldItalic.ttf'),
 
-    OpenSans_700: require('./assets/fonts/OpenSans/OpenSans-Bold.ttf'),
-    OpenSans_700_Italic: require('./assets/fonts/OpenSans/OpenSans-BoldItalic.ttf'),
+    OpenSans_700: require('./assets/fonts/Open_Sans/static/OpenSans-Bold.ttf'),
+    OpenSans_700_Italic: require('./assets/fonts/Open_Sans/static/OpenSans-BoldItalic.ttf'),
 
-    OpenSans_800: require('./assets/fonts/OpenSans/OpenSans-ExtraBold.ttf'),
-    OpenSans_800_Italic: require('./assets/fonts/OpenSans/OpenSans-ExtraBoldItalic.ttf'),
+    OpenSans_800: require('./assets/fonts/Open_Sans/static/OpenSans-ExtraBold.ttf'),
+    OpenSans_800_Italic: require('./assets/fonts/Open_Sans/static/OpenSans-ExtraBoldItalic.ttf'),
   })
 
+  const linking = {
+    prefixes: [Linking.createURL('/')],
+    config: {
+      screens: {
+        Character: 'character',
+        Inventory: 'inventory',
+        Roll: 'roll',
+        Talents: 'talents',
+        Journal: 'journal'
+      }
+    }
+  }
+
   useEffect(() => {
+    SplashScreen.preventAutoHideAsync();
+  }, [])
+
+  useEffect(() => {
+    
     if (fontsLoaded) {
       SplashScreen.hideAsync()
     }
@@ -43,21 +61,9 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.namingFont}>Bem vindo a Resistência.</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer linking={linking}>
+      <BottomTabs />
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000',
-  },
-  namingFont: {
-    fontFamily: Fonts.starJedi,
-    fontSize: 16,
-    color: 'rgba(255, 251, 0, 1)'
-  }
-});

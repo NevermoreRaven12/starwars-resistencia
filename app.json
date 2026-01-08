@@ -4,7 +4,9 @@
     "slug": "Resistencia",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/rpgIcon.png",
+    "scheme": "resistencia",
+    "plataforms": ["ios", "android", "web"],
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
@@ -24,7 +26,7 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/rpgIcon.png"
     },
     "plugins": [
       "expo-font"

@@ -3,5 +3,6 @@ export interface Miscelaneo {
     nome: string,
     preco: number,
     descricao: string,
-    efeito?: string
+    efeito?: string,
+    quest?: boolean
 }
