@@ -1,0 +1,7 @@
+export interface Acessorio {
+    id: number
+    nome: string
+    descricao: string
+    efeito?: string
+    preco: number
+}

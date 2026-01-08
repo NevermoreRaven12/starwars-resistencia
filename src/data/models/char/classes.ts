@@ -1,0 +1,1 @@
+export const Classes = ["Cavaleiro Jedi", "Jedi Consular", "Inquisidor", "Lorde Sith", "Rebelde", "Caçador de Recompensas", "Diplomata", "Monge"] as const
