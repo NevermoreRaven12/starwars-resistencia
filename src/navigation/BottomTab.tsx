@@ -15,9 +15,12 @@ export default function BottomTabs() {
             screenOptions={{
                 headerShown: false,
                 tabBarShowLabel: false,
+                tabBarHideOnKeyboard: true,
                 tabBarStyle: {
-                    backgroundColor: Colors.primary,
-                    borderTopColor: Colors.highlight
+                    backgroundColor: 'transparent',
+                    borderTopWidth: 0,
+                    elevation: 0,
+                    position: 'absolute'
                 },
                 tabBarActiveTintColor: Colors.highlight,
                 tabBarInactiveTintColor: Colors.secondary
@@ -25,37 +28,37 @@ export default function BottomTabs() {
                 <Tab.Screen 
                     name='Character'
                     component={CharSheet}
-                    options={{tabBarIcon: ({color, size}) => {
+                    options={{tabBarIcon: ({focused}) => {
                         const Icon = Icons.Char
-                        return <Icon color={color} size={size} />
+                        return <Icon color={focused? Colors.highlight : Colors.secondary} size={focused ? 48 : 36} style={focused ? {borderTopColor: Colors.highlight, borderTopWidth: 1} : {borderTopColor: 'transparent', borderTopWidth: 0}} />
                     }}} />
                 <Tab.Screen
                     name='Inventory'
                     component={Inventory}
-                    options={{tabBarIcon: ({color, size}) => {
+                    options={{tabBarIcon: ({focused}) => {
                         const Icon = Icons.Inventory
-                        return <Icon color={color} size={size} />
+                        return <Icon color={focused ? Colors.highlight : Colors.secondary} size={focused ? 48 : 36} />
                     }}} />
                 <Tab.Screen
                     name='Roll'
                     component={Roll}
-                    options={{tabBarIcon: ({color, size}) => {
+                    options={{tabBarIcon: ({focused}) => {
                         const Icon = Icons.d20
-                        return <Icon stroke={color} width={size} height={size} />
+                        return <Icon color={focused ? Colors.highlight : Colors.secondary} width={focused ? 48 : 36} height={focused ? 48 : 36} />
                     }}} />
                 <Tab.Screen
                     name='Talents'
                     component={Talents}
-                    options={{tabBarIcon: ({color, size}) => {
+                    options={{tabBarIcon: ({focused}) => {
                         const Icon = Icons.ST
-                        return <Icon color={color} size={size} />
+                        return <Icon color={focused ? Colors.highlight : Colors.secondary} size={focused ? 48 : 36} />
                     }}} />
                 <Tab.Screen
                     name='Diary'
                     component={Journal}
-                    options={{tabBarIcon: ({color, size}) => {
+                    options={{tabBarIcon: ({focused}) => {
                         const Icon = Icons.Diary
-                        return <Icon color={color} size={size} />
+                        return <Icon color={focused ? Colors.highlight : Colors.secondary} size={focused ? 48 : 36} />
                     }}} />
 
             </Tab.Navigator>

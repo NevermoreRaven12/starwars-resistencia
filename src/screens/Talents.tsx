@@ -1,12 +1,34 @@
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
+import { Colors } from "../theme/Colors";
 
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Fonts } from "../theme/Fonts";
+import { Typography } from "../theme/Typography";
+import { Spacing } from "../theme/Spacing";
 export default function Talents() {
     return (
-    <View>
-        <Text>
-            Essa é a tela da árvore de talentos
+    <SafeAreaView style={styles.container}>
+        <Text style={styles.title}>
+            habilidades
         </Text>
-    </View>
+    </SafeAreaView>
     )
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    backgroundColor: Colors.primary,
+    gap: Spacing.md,
+    padding: Spacing.sm
+  },
+  title: {
+      textAlign: 'center',
+      fontFamily: Fonts.starJedi,
+      fontSize: Typography.size.xl,
+      letterSpacing: Typography.letterSpacing.title,
+      lineHeight: Typography.lineHeight.md,
+      color: Colors.highlight
+    }
+})

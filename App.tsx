@@ -4,6 +4,10 @@ import { useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen'
 import { NavigationContainer } from '@react-navigation/native';
 import BottomTabs from './src/navigation/BottomTab';
+import { StyleSheet } from 'react-native';
+import { Colors } from './src/theme/Colors';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
 
 
 
@@ -61,9 +65,17 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer linking={linking}>
-      <BottomTabs />
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer linking={linking}>
+          <BottomTabs />
+      </NavigationContainer>
+    </SafeAreaProvider>
+     
   );
 }
 
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: Colors.primary,
+  }
+})
