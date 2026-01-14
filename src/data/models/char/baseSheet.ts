@@ -18,9 +18,20 @@ export interface Character{
     },
     // opcionais para a interface comportar tanto forca quanto stamina dependendo da classe, evita criar lógica de detecção, aceita ambos
     recursos: {
-        hp: number
-        forca?: number,
-        stamina?: number
+        hp: {
+            atual: number,
+            max: number
+        }
+        forca?: {
+            name: string
+            atual: number
+            max: number
+        }
+        stamina?: {
+            name: string
+            atual: number
+            max: number
+        }
     },
     // nao tenho certeza se funciona do jeito q eu gostaria
     atributos: Atributo[]

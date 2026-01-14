@@ -1,3 +1,5 @@
+import { Dimensions } from "react-native"
+
 export function calcularXpMax(nivel: number): number {
     if (nivel === 1) {
         return 250
@@ -37,6 +39,18 @@ export function getBonus(atributo: number): number {
     }
 
     return bonus
+}
+
+export function calcularBarraPercent(current: number, max: number): number {
+    return Math.min((current / max) * 100, 100)
+}
+
+const baseWidth = 402
+const {width: screenWidth} = Dimensions.get('window')
+const maxScale = 1.6
+export function scale(size: number): number {
+    const factor = Math.min(screenWidth / baseWidth, maxScale)
+    return size * factor
 }
 
 console.log(getBonus(10))

@@ -15,7 +15,7 @@ export const CharMock: Character = {
     classe: "Cavaleiro Jedi",
 
     experiencia: {
-        atual: 0,
+        atual: 2000,
         max: calcularXpMax(nivel)
     },
 
@@ -28,8 +28,15 @@ export const CharMock: Character = {
     ],
 
     recursos: {
-        hp: 29,
-        stamina: 147
+        hp: {
+            atual: 29,
+            max: 29
+        },
+        forca: {
+            name: "Força",
+            atual: 147,
+            max: 147
+        }
     },
 
     historia: "Era um guarda pessoal do Deputado Jonas Carlorin, com a queda da República ele teve um encontro direto com a Força no meio do caos e conseguiu fugir graças à Força. Desde então está em busca da mesma conexão que teve naquele momento, mas nunca conseguiu. Mesmo assim, jamais perdeu a fé na Força."

@@ -1,13 +1,60 @@
 import { View, Text,StyleSheet } from "react-native";
-import { Colors } from "../theme/Colors";
+import { Colors } from '../theme/Colors';
 import { Typography } from "../theme/Typography";
 import { Spacing } from "../theme/Spacing";
 import { Fonts } from "../theme/Fonts";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Circle } from "lucide-react-native";
 import { CharMock } from "../data/mocks/char.mock";
+import { useEffect, useState } from "react";
+import { calcularBarraPercent } from "../data/models/char/utils";
+
+
 
 export default function CharSheet() {
+
+  const [currentXp, setCurrentXp] = useState(0)
+  const [currentHp, setCurrentHp] = useState(0)
+  const [currentRes, setCurrentRes] = useState(0)
+  const [resourceName, setResourceName] = useState("")
+
+  const resourceType = CharMock.recursos.stamina ?? CharMock.recursos.forca
+
+  useEffect(() => {
+    if (!resourceType) return
+
+    setResourceName(resourceType.name)
+  }, [resourceType])
+  
+  useEffect(() => {
+    if (CharMock.experiencia.atual > CharMock.experiencia.max) {
+      setCurrentXp(CharMock.experiencia.max)
+    } else {
+        setCurrentXp(CharMock.experiencia.atual)
+    }
+    
+  }, [CharMock.experiencia.atual])
+
+  useEffect(() => {
+    if (CharMock.recursos.hp.atual > CharMock.recursos.hp.max) {
+      setCurrentHp(CharMock.recursos.hp.atual)
+    } else {
+      setCurrentHp(CharMock.recursos.hp.atual)
+    }
+    
+  }, [CharMock.recursos.hp.atual])
+
+  useEffect(() => {
+    if (!resourceType) return
+
+    let staminaAtual = resourceType.atual
+    setCurrentRes(staminaAtual)
+  }, [resourceType])
+
+  const porcentagemXp = calcularBarraPercent(currentXp, CharMock.experiencia.max)
+  const porcentagemHp = calcularBarraPercent(currentHp, CharMock.recursos.hp.max)
+  const porcentagemRes = calcularBarraPercent(currentRes, resourceType?.max ?? 100)
+  
     return (
 <SafeAreaView style={styles.container}>
         <Text style={styles.title}>
@@ -25,16 +72,28 @@ export default function CharSheet() {
               <Text style={styles.body}>{CharMock.raca}/{CharMock.classe} {CharMock.nivel}</Text>
             </View>
             <View style={styles.statsItem}>
-              <Text style={styles.body}>HP: {CharMock.recursos.hp}</Text>
+              <Text style={styles.body}>HP: {currentHp}/{CharMock.recursos.hp.max}</Text>
               
             </View>
             <View style={styles.statsItem}>
-              <Text style={styles.body}>Forca: {CharMock.recursos.stamina}</Text>
+              <Text style={styles.body}>{resourceName}: {currentRes}/{resourceType?.max}</Text>
             </View>
-            <View style={styles.statsItem}>
+            <View style={{position: 'relative', width: '48%'}}>
+            <View style={{backgroundColor: Colors.secondary, width: '100%', height: 8, borderRadius: 8}}>
+            <View style={{position: 'absolute', backgroundColor: Colors.hpBar, width: `${porcentagemHp}%`, height: 8, borderRadius: 8}}></View>
             </View>
-            <View style={styles.statsItem}>
-
+            </View>
+             <View style={{position: 'relative', width: '48%'}}>
+            <View style={{backgroundColor: Colors.secondary, width: '100%', height: 8, borderRadius: 8}}>
+            <View style={{position: 'absolute', backgroundColor: `${resourceType?.name === "Stamina" ? Colors.staminaBar : Colors.forceBar}`, width: `${porcentagemRes}%`, height: 8, borderRadius: 8}}></View>
+            </View>
+            </View>
+            <View style={{flexDirection: 'column', width: '96.7%', height: 'auto'}}>
+              <Text style={styles.body}>XP: {currentXp}/{CharMock.experiencia.max}</Text>
+              <View style={{position: 'relative'}}>
+              <View style={{backgroundColor: Colors.secondary, width: '100%', height: 8, borderRadius: 8, zIndex: 0}}></View>
+              <View style={{backgroundColor: Colors.xpBar, width: `${porcentagemXp}%`, height: 8, borderRadius: 8, zIndex: 99, position: 'absolute'}}></View>
+              </View>
             </View>
           </View>
         </View>
@@ -49,8 +108,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: Colors.primary,
-    gap: Spacing.md,
-    padding: Spacing.sm,
+    gap: Spacing.md
   },
   title: {
     textAlign: 'center',
@@ -66,7 +124,8 @@ const styles = StyleSheet.create({
     gap: Spacing.md,
     height: 200,
     justifyContent: 'space-between',
-    marginLeft: Spacing.lg
+    marginLeft: Spacing.lg,
+    marginRight: Spacing.lg
     
   },
   imageContainer: {
@@ -86,7 +145,7 @@ const styles = StyleSheet.create({
   },
   statsItem: {
     flexWrap: 'wrap',
-    width: '45%',
+    width: '48%',
     height: 'auto',
     backgroundColor: Colors.highlight,
     alignItems: 'center',
