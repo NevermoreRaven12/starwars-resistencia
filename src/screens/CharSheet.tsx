@@ -8,6 +8,8 @@ import { Circle } from "lucide-react-native";
 import { CharMock } from "../data/mocks/char.mock";
 import { useEffect, useState } from "react";
 import { calcularBarraPercent } from "../data/models/char/utils";
+import AtributeTable from "../components/atributeTable";
+import { global } from "../theme/globalStyles";
 
 
 
@@ -56,68 +58,72 @@ export default function CharSheet() {
   const porcentagemRes = calcularBarraPercent(currentRes, resourceType?.max ?? 100)
   
     return (
-<SafeAreaView style={styles.container}>
-        <Text style={styles.title}>
+<SafeAreaView style={global.container}>
+        <Text style={global.title}>
             resistencia
         </Text>
+
+
         <View style={styles.statGrid}>
           <View style={styles.imageContainer}>
               <Circle color={'white'} size={'100%'} strokeWidth={0.5}/>
           </View>
+
+
           <View style={styles.statsContainer}>
             <View style={styles.statsItem}>
-              <Text style={styles.body}>{CharMock.nome}</Text>
+              <Text style={global.body}>{CharMock.nome}</Text>
             </View>
+
             <View style={styles.statsItem}>
-              <Text style={styles.body}>{CharMock.raca}/{CharMock.classe} {CharMock.nivel}</Text>
+              <Text style={global.body}>{CharMock.raca}/{CharMock.classe} {CharMock.nivel}</Text>
             </View>
+
             <View style={styles.statsItem}>
-              <Text style={styles.body}>HP: {currentHp}/{CharMock.recursos.hp.max}</Text>
-              
+              <Text style={global.body}>HP: {currentHp}/{CharMock.recursos.hp.max}</Text>
             </View>
+
             <View style={styles.statsItem}>
-              <Text style={styles.body}>{resourceName}: {currentRes}/{resourceType?.max}</Text>
+              <Text style={global.body}>{resourceName}: {currentRes}/{resourceType?.max}</Text>
             </View>
+
             <View style={{position: 'relative', width: '48%'}}>
-            <View style={{backgroundColor: Colors.secondary, width: '100%', height: 8, borderRadius: 8}}>
-            <View style={{position: 'absolute', backgroundColor: Colors.hpBar, width: `${porcentagemHp}%`, height: 8, borderRadius: 8}}></View>
+              <View style={{backgroundColor: Colors.secondary, width: '100%', height: 8, borderRadius: 8}}>
+              <View style={{position: 'absolute', backgroundColor: Colors.hpBar, width: `${porcentagemHp}%`, height: 8, borderRadius: 8}}></View>
             </View>
             </View>
-             <View style={{position: 'relative', width: '48%'}}>
-            <View style={{backgroundColor: Colors.secondary, width: '100%', height: 8, borderRadius: 8}}>
-            <View style={{position: 'absolute', backgroundColor: `${resourceType?.name === "Stamina" ? Colors.staminaBar : Colors.forceBar}`, width: `${porcentagemRes}%`, height: 8, borderRadius: 8}}></View>
+
+
+            <View style={{position: 'relative', width: '48%'}}>
+              <View style={{backgroundColor: Colors.secondary, width: '100%', height: 8, borderRadius: 8}}>
+              <View style={{position: 'absolute', backgroundColor: `${resourceType?.name === "Stamina" ? Colors.staminaBar : Colors.forceBar}`, width: `${porcentagemRes}%`, height: 8, borderRadius: 8}}></View>
             </View>
             </View>
             <View style={{flexDirection: 'column', width: '96.7%', height: 'auto'}}>
-              <Text style={styles.body}>XP: {currentXp}/{CharMock.experiencia.max}</Text>
-              <View style={{position: 'relative'}}>
-              <View style={{backgroundColor: Colors.secondary, width: '100%', height: 8, borderRadius: 8, zIndex: 0}}></View>
-              <View style={{backgroundColor: Colors.xpBar, width: `${porcentagemXp}%`, height: 8, borderRadius: 8, zIndex: 99, position: 'absolute'}}></View>
+              <Text style={global.body}>XP: {currentXp}/{CharMock.experiencia.max}</Text>
+                <View style={{position: 'relative'}}>
+                <View style={{backgroundColor: Colors.secondary, width: '100%', height: 8, borderRadius: 8, zIndex: 0}}></View>
+                <View style={{backgroundColor: Colors.xpBar, width: `${porcentagemXp}%`, height: 8, borderRadius: 8, zIndex: 99, position: 'absolute'}}></View>
               </View>
             </View>
           </View>
         </View>
+
+        <Text style={global.title}>Atributos</Text>
+
+        <AtributeTable />
+
+        
+          
+        
     </SafeAreaView>
     )
     
 }
 
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: Colors.primary,
-    gap: Spacing.md
-  },
-  title: {
-    textAlign: 'center',
-    fontFamily: Fonts.starJedi,
-    fontSize: Typography.size.xl,
-    letterSpacing: Typography.letterSpacing.title,
-    lineHeight: Typography.lineHeight.md,
-    color: Colors.highlight
-  },
+export const styles = StyleSheet.create({
+  
   statGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -151,11 +157,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  body: {
-    fontFamily: Fonts.openSans.medium,
-    fontSize: Typography.size.sm,
-    letterSpacing: Typography.letterSpacing.body,
-    lineHeight: Typography.lineHeight.sm,
-    textAlign: 'justify'
-  }
+
+  
 })
