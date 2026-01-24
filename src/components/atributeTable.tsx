@@ -6,26 +6,39 @@ import { Typography } from "../theme/Typography";
 
 
 
-export default function AtributeTable({fisico, observacao, raciocinio, carisma, espirito, fBonus, oBonus, rBonus, cBonus, eBonus}){
+export default function AtributeTable({atributos}){
 
-    const atributos = [
-  { key: 'fis', label: 'Físico', valor: fisico, bonus: fBonus },
-  { key: 'obs', label: 'Observação', valor: observacao, bonus: oBonus },
-  { key: 'rac', label: 'Raciocínio', valor: raciocinio, bonus: rBonus },
-  { key: 'car', label: 'Carisma', valor: carisma, bonus: cBonus },
-  {key: 'esp', label: 'Espírito', valor: espirito, bonus: eBonus}
-]
+    
     return (
         <View style={styles.attrContainer}>
             <View style={styles.attrItem}>
                 <View style={styles.internalGrid}>
+                  <View style={styles.col}>
                     <Text style={styles.attrHeader}>atributo</Text>
+                  </View>
+                  <View style={styles.col}>
                     <Text style={styles.attrHeader}>valor</Text>
+                  </View>
+                  <View style={styles.col}>
                     <Text style={styles.attrHeader}>bonus</Text>
+                  </View>
                 </View>
             </View>
-
-            
+            {atributos.map((item) => (
+              <View key={item.key} style={styles.attrItem}>
+                <View style={styles.internalGrid}>
+                  <View style={styles.col}>
+                    <Text style={styles.attrHeaderWhite}>{item.label}</Text>
+                  </View>
+                  <View style={styles.col}>
+                    <Text style={styles.attrHeaderWhite}>{item.valor}</Text>
+                  </View>
+                  <View style={styles.col}>
+                    <Text style={styles.attrHeaderWhite}>{item.bonus}</Text>
+                  </View>
+                </View>
+              </View>
+            ))}
 
           
         
@@ -36,7 +49,7 @@ export default function AtributeTable({fisico, observacao, raciocinio, carisma, 
     )
 }
 
-const styles = StyleSheet.create({
+ const styles = StyleSheet.create({
     attrContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -54,10 +67,12 @@ const styles = StyleSheet.create({
   },
   internalGrid: {
     flexDirection: 'row',
-    flex: 1,
-    justifyContent: 'space-evenly',
-    alignItems: 'center'
+    width: '100%'
 
+  },
+  col: {
+    width: '33.33%',
+    alignItems: 'center'
   },
   attrHeader: {
     fontFamily: Fonts.starJedi,

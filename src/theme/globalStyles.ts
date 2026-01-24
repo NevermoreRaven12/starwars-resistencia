@@ -24,6 +24,7 @@ export const global = StyleSheet.create({
     fontSize: Typography.size.sm,
     letterSpacing: Typography.letterSpacing.body,
     lineHeight: Typography.lineHeight.sm,
-    textAlign: 'justify'
+    textAlign: 'justify',
+    color: Colors.secondary
   }
 })

@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { calcularBarraPercent } from "../data/models/char/utils";
 import AtributeTable from "../components/atributeTable";
 import { global } from "../theme/globalStyles";
+import LoreField from "../components/loreField";
 
 
 
@@ -76,9 +77,16 @@ export default function CharSheet() {
             </View>
 
             <View style={styles.statsItem}>
-              <Text style={global.body}>{CharMock.raca}/{CharMock.classe} {CharMock.nivel}</Text>
+              <Text style={global.body}>{CharMock.raca} </Text>
             </View>
 
+            <View style={styles.statsItem}>
+              <Text style={global.body}>{CharMock.classe}</Text>
+            </View>
+
+            <View style={styles.statsItem}>
+              <Text style={global.body}>Nível {CharMock.nivel}</Text>
+            </View>
             <View style={styles.statsItem}>
               <Text style={global.body}>HP: {currentHp}/{CharMock.recursos.hp.max}</Text>
             </View>
@@ -99,7 +107,7 @@ export default function CharSheet() {
               <View style={{position: 'absolute', backgroundColor: `${resourceType?.name === "Stamina" ? Colors.staminaBar : Colors.forceBar}`, width: `${porcentagemRes}%`, height: 8, borderRadius: 8}}></View>
             </View>
             </View>
-            <View style={{flexDirection: 'column', width: '96.7%', height: 'auto'}}>
+            <View style={{flexDirection: 'column', width: '99%', height: 'auto'}}>
               <Text style={global.body}>XP: {currentXp}/{CharMock.experiencia.max}</Text>
                 <View style={{position: 'relative'}}>
                 <View style={{backgroundColor: Colors.secondary, width: '100%', height: 8, borderRadius: 8, zIndex: 0}}></View>
@@ -111,7 +119,14 @@ export default function CharSheet() {
 
         <Text style={global.title}>Atributos</Text>
 
-        <AtributeTable />
+        <AtributeTable atributos={CharMock.atributos.map((attr) => ({
+          key: attr.tipo,
+          label: attr.tipo,
+          valor: attr.valor,
+          bonus: attr.bonus
+        }))} />
+
+        <LoreField />
 
         
           
@@ -146,14 +161,12 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: Spacing.md,
-    backgroundColor: '#919191ff',
     padding: Spacing.md
   },
   statsItem: {
     flexWrap: 'wrap',
     width: '48%',
     height: 'auto',
-    backgroundColor: Colors.highlight,
     alignItems: 'center',
     justifyContent: 'center',
   },

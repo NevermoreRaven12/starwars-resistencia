@@ -21,7 +21,7 @@ export const CharMock: Character = {
 
     atributos: [
         {tipo: 'Fisico', valor: 14, bonus: getBonus(14)},
-        {tipo: "Observacao", valor: 12, bonus: getBonus(12)},
+        {tipo: "observacao", valor: 12, bonus: getBonus(12)},
         {tipo: "Raciocinio", valor: 10, bonus: getBonus(10)},
         {tipo: "Carisma", valor: 8, bonus: getBonus(8)},
         {tipo: "Espírito", valor: 18, bonus: getBonus(18)}

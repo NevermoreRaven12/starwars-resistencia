@@ -1,4 +1,4 @@
-export const stats = ["Fisico", "Observacao", "Raciocinio", "Carisma", "Espírito"] as const
+export const stats = ["Fisico", "observacao", "Raciocinio", "Carisma", "Espírito"] as const
 
 export interface Atributo {
     tipo: typeof stats[number],
